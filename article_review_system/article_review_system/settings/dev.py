@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login.apps.LoginConfig',
+    'showdata.apps.ShowdataConfig',
 ]
 
 MIDDLEWARE = [
@@ -167,14 +168,14 @@ AUTH_USER_MODEL = 'login.User'
 CACHES = {
     "default": { # 默认
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3/14",
+        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3:7777/14",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "session": { # session
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3/15",
+        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3:7777/15",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }

@@ -1,7 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-
-# Create your views here.
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 from django.views import View
 
 
@@ -12,6 +10,14 @@ class Login(View):
         # 接受参数
         username = request.POST.get('username')
         password = request.POST.get('pwd')
-        print(username)
-        print(password)
-        return HttpResponse("卧槽无情")
+        # 认证登录用户
+        user = authenticate(username=username, password=password)
+        if user is  None:
+            content={"message":"账户或密码错误"}
+            return render(request, 'login.html',content)
+        # 实现状态保持
+        login(request, user)
+        # 设置状态保持的周期
+        request.session.set_expiry(None)
+        # 响应登录结果
+        return redirect('/showdata/')
