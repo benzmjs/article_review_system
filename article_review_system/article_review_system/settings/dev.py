@@ -183,3 +183,9 @@ CACHES = {
 }
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "session"
+
+MYSQL_HOST = '122.114.121.137'
+MYSQL_USERNAME = 'ceshi_txglcz_com'
+MYSQL_PASSWORD = 'jYRaEb3Mw4HKnDEy'
+DB_NAME = 'ceshi_txglcz_com'
+DB_PORT = 3306

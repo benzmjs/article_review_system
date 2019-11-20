@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import BookInfo
-
-
+import pymysql
+import time
+from article_review_system.settings.dev import MYSQL_HOST,MYSQL_USERNAME,MYSQL_PASSWORD,DB_NAME,DB_PORT
 class Showdata(View):
 
     def get(self, request):
@@ -44,3 +45,36 @@ class DeleteData(View):
         id = request.GET.get('id')
         BookInfo.objects.filter(id=id).delete()
         return redirect('/showdata/')
+
+
+class PublishData(View):
+    def __init__(self):
+        # 连接MySQL
+        self.connect = pymysql.connect(host=MYSQL_HOST, port=DB_PORT, user=MYSQL_USERNAME, password=MYSQL_PASSWORD,
+                                       db=DB_NAME)
+        self.cursor = self.connect.cursor()
+    def get(self,request):
+        id = request.GET.get('id')
+        content = BookInfo.objects.get(id=id).content
+        title=BookInfo.objects.get(id=id).title
+        # 将item数据写入表www_kaifamei_com_ecms_news_check
+        insert_sql_first = '''INSERT INTO www_kaifamei_com_ecms_news_check(classid,newspath,filename,title,titleurl,newstime) VALUES (4,"{}","100","{}","news/yxnews/{}/{}","{}")'''.format(
+            time.strftime('%Y-%m-%d', time.localtime(time.time())), '(系统写入测试)'+title,
+            time.strftime('%Y-%m-%d', time.localtime(time.time())), '2.html', int(time.time()))
+        update_sql_first = '''UPDATE www_kaifamei_com_ecms_news_check SET filename=id'''
+        # 将item数据写入表www_kaifamei_com_ecms_news_check_data
+        insert_sql_second = '''INSERT INTO www_kaifamei_com_ecms_news_check_data(classid,dokey,newstext) VALUES (4,1,'{}')'''.format(
+            content)
+        # 将item数据写入表www_kaifamei_com_ecms_news_index
+        insert_sql_third = '''INSERT INTO www_kaifamei_com_ecms_news_index(classid,lastdotime) VALUES (4,{})'''.format(
+            int(time.time()))
+        try:
+            self.cursor.execute(insert_sql_first)
+            self.cursor.execute(update_sql_first)
+            self.cursor.execute(insert_sql_second)
+            self.cursor.execute(insert_sql_third)
+            self.connect.commit()
+            BookInfo.objects.filter(id=id).delete()
+            return redirect('/showdata/')
+        except:
+            pass
