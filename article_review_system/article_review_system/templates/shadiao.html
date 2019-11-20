@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>修改页面</title>
+</head>
+<body>
+<div align="center">
+    <form action="/update/?id={{id}}" method="post">
+        {{ csrf_input }}
+        <h1>
+            以下为文章内容，修改完成后点击确认修改
+        </h1><br>
+        <textarea name= "textarea" style="margin:20px;width:800px;height:500px">
+    {{info}}
+    </textarea><br>
+        <input align="center" type="submit" value="确认修改">
+    </form>
+</div>
+</body>
+</html>

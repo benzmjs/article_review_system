@@ -25,7 +25,7 @@ SECRET_KEY = '5lmx*a^6c-28@1$if!&9c^1rtcr&zgfgz9arggn5wfp=%o_3%h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
