@@ -30,6 +30,7 @@ class UpdateData(View):
         return render(request, 'shadiao.html',data)
 
     def post(self, request):
+        """接收文章id和文章内容，根据id修改数据库中的content，修改完成后重定向到首页也就是showdata页面"""
         id = request.GET.get('id')
         content=request.POST.get('textarea')
         BookInfo.objects.filter(id=id).update(content=content)
