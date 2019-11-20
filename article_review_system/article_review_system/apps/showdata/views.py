@@ -48,12 +48,14 @@ class DeleteData(View):
 
 
 class PublishData(View):
+    """发布功能"""
     def __init__(self):
         # 连接MySQL
         self.connect = pymysql.connect(host=MYSQL_HOST, port=DB_PORT, user=MYSQL_USERNAME, password=MYSQL_PASSWORD,
                                        db=DB_NAME)
         self.cursor = self.connect.cursor()
     def get(self,request):
+        """接收前端发送的id,查询出id对应的content，然后写入到服务器中，根据文章id删除系统数据库文章"""
         id = request.GET.get('id')
         content = BookInfo.objects.get(id=id).content
         title=BookInfo.objects.get(id=id).title
