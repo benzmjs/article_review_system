@@ -19,6 +19,7 @@ class Showdata(View):
 
 
 class UpdateData(View):
+    """修改功能"""
     def get(self, request):
         "接收id，返回文章内容数据"
         id = request.GET.get('id')
@@ -34,4 +35,12 @@ class UpdateData(View):
         id = request.GET.get('id')
         content=request.POST.get('textarea')
         BookInfo.objects.filter(id=id).update(content=content)
+        return redirect('/showdata/')
+
+class DeleteData(View):
+    """删除功能"""
+    def get(self,request):
+        """接收文章id，根据id删除对应的文章"""
+        id = request.GET.get('id')
+        BookInfo.objects.filter(id=id).delete()
         return redirect('/showdata/')
