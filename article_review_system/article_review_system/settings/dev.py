@@ -23,7 +23,7 @@ sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
 SECRET_KEY = '5lmx*a^6c-28@1$if!&9c^1rtcr&zgfgz9arggn5wfp=%o_3%h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -78,10 +78,10 @@ WSGI_APPLICATION = 'article_review_system.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 数据库引擎
-        'HOST': '122.114.178.3',  # 数据库主机
+        'HOST': '127.0.0.1',  # 数据库主机
         'PORT': 3306,  # 数据库端口
-        'USER': 'article_user',  # 数据库用户名
-        'PASSWORD': 'Suanyukeji666...+++',  # 数据库用户密码
+        'USER': 'suanyukeji',  # 数据库用户名
+        'PASSWORD': 'Suanyukeji666...+++...888',  # 数据库用户密码
         'NAME': 'article_review_system'  # 数据库名字
     },
 }
@@ -123,6 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # 配置静态文件加载路径
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,  # 是否禁用已经存在的日志器
@@ -168,14 +169,14 @@ AUTH_USER_MODEL = 'login.User'
 CACHES = {
     "default": { # 默认
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3:7777/14",
+        "LOCATION": "redis://:Pwd2019@39.97.171.157:6379/1",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
     "session": { # session
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://:v5jK8DJNprbo6siQIv@122.114.178.3:7777/15",
+        "LOCATION": "redis://:Pwd2019@39.97.171.157:6379/2",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
